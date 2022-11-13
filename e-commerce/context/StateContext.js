@@ -16,6 +16,9 @@ export const StateContext = ({ children }) => {
 
    const [qty, setQty] = useState(1);
 
+   let foundProduct;
+   let index;
+
    //function for a product that already exists in the cart
    const onAdd = (product, quantity) => {
       const checkProductInCart = cartItems.find((item) => item._id === product._id);
@@ -48,6 +51,27 @@ export const StateContext = ({ children }) => {
 
       
       toast.success(`${qty} ${product.name} added to the cart!!!`);
+   }
+
+   //to toggle quantity
+   const toggleCartItemQuantity = () => {
+      foundProduct = cartItems.find((item) => item._id === id)
+
+      index = cartItems.findIndex((product) => product._id === id)
+
+      if (value === 'inc') {
+         // let newCartItems = [...cartItems, { ...product, quantity: product.quantity + 1 }] 
+         // setCartItems(newCartItems)
+
+         setCartItems([...cartItems, { ...foundProduct, quantity: foundProduct.quantity + 1 }])
+         
+         setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price)
+
+      } else if (value === 'dec') {
+         setCartItems([...cartItems, { ...foundProduct, quantity: foundProduct.quantity - 1 }])
+         
+         setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price)
+      }
    }
 
    //increase and decrease functionalities on the plus and minus buttons

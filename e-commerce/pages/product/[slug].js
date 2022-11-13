@@ -72,6 +72,9 @@ const ProductDetails = ({ product, products }) => {
               </span>
             </p>
           </div>
+              
+          {/* add to cart and buy now buttons */}
+          
           <div className="buttons">
             <button
               type="button"
@@ -86,6 +89,8 @@ const ProductDetails = ({ product, products }) => {
           </div>
         </div>
       </div>
+
+      {/* other product suggestions */}
 
       <div className="maylike-products-wrapper">
         <h2>You may also like</h2>
